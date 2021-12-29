@@ -4,7 +4,7 @@ module InfluxDb
   module Testing
     class DataPointTest < InfluxDb::Testing::Test
       def test_to_influxdb_write_string
-        dp_01 = InfluxDb::DataPoint.new.tap do |d|
+        dp_01 = InfluxDb::V1::DataPoint.new.tap do |d|
           d.measurement = 'memory_usage'
           d.add_tag(:name, 'recorder0')
           d.add_attr(:virtual, 1_000_000)
@@ -19,7 +19,7 @@ module InfluxDb
       end
 
       def test_to_influxdb_write_string_with_space_in_tag
-        dp_01 = InfluxDb::DataPoint.new.tap do |d|
+        dp_01 = InfluxDb::V1::DataPoint.new.tap do |d|
           d.measurement = 'memory_usage'
           d.add_tag(:name, 'the powerful recorder')
           d.add_attr(:virtual, 2_000_000)

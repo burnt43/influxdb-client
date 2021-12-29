@@ -4,9 +4,9 @@ module InfluxDb
   module Testing
     class ClientTest < InfluxDb::Testing::Test
       def test_build_write_command
-        client_01 = InfluxDb::Client.new('local', 'fake_db', port: 8086, protocol: 'http')
+        client_01 = InfluxDb::V1::Client.new('local', 'fake_db', port: 8086, protocol: 'http')
 
-        dp_01 = InfluxDb::DataPoint.new.tap do |d|
+        dp_01 = InfluxDb::V1::DataPoint.new.tap do |d|
           d.measurement = 'meas_01'
           d.add_tag(:name, 'name_01')
           d.add_attr(:attr_01, 1)
@@ -20,16 +20,16 @@ module InfluxDb
       end
 
       def test_build_write_command_with_multiple_data_points
-        client_01 = InfluxDb::Client.new('local', 'fake_db', port: 8086, protocol: 'http')
+        client_01 = InfluxDb::V1::Client.new('local', 'fake_db', port: 8086, protocol: 'http')
 
-        dp_01 = InfluxDb::DataPoint.new.tap do |d|
+        dp_01 = InfluxDb::V1::DataPoint.new.tap do |d|
           d.measurement = 'meas_01'
           d.add_tag(:name, 'name_01')
           d.add_attr(:attr_01, 1)
           d.time = Time.parse('2021-01-01 12:00:00')
         end
 
-        dp_02 = InfluxDb::DataPoint.new.tap do |d|
+        dp_02 = InfluxDb::V1::DataPoint.new.tap do |d|
           d.measurement = 'meas_01'
           d.add_tag(:name, 'name_01')
           d.add_attr(:attr_01, 2)
@@ -43,7 +43,7 @@ module InfluxDb
       end
 
       def test_parse_query_result
-        client_01 = InfluxDb::Client.new('local', 'fake_db', port: 8086, protocol: 'http')
+        client_01 = InfluxDb::V1::Client.new('local', 'fake_db', port: 8086, protocol: 'http')
 
         sample_response_01 = %Q({"results":[{"statement_id":0,"series":[{"name":"memory_usage","columns":["time","name","physical","virtual"],"values":[["2021-12-29T16:55:51.953443786Z","recorder0",5000,1000000]]}]}]})
         result = client_01.send(:parse_query_result, sample_response_01)
