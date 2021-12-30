@@ -1,0 +1,18 @@
+#!/bin/bash
+
+script_path=$(dirname $0)
+root_app_path="${script_path}/.."
+
+if [[ "${root_app_path:0:1}" != "/" && "${root_app_path:0:1}" != "." ]]; then
+  root_app_path="./${root_app_path}"
+fi
+
+case "$(hostname)" in
+  burnt43)
+    ruby_bin=/usr/local/ruby/ruby-2.6.1/bin/ruby
+    irb_bin=/usr/local/ruby/ruby-2.6.1/bin/irb
+    bundle_bin=/usr/local/ruby/ruby-2.6.1/bin/bundle
+    ;;
+esac
+
+$bundle_bin exec $irb_bin -r${root_app_path}/lib/influx_db.rb

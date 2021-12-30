@@ -7,7 +7,7 @@ end
 
 class String
   def influxdb_value_safe
-    self.gsub(' ', '\ ')
+    self.gsub(' ', '\ ').gsub('"', '\"')
   end
 end
 
