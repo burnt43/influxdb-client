@@ -1,6 +1,6 @@
 Gem::Specification.new do |s|
   s.name        = 'influxdb-client'
-  s.version     = '0.0.2'
+  s.version     = '0.0.3'
   s.summary     = 'client for influxdb'
   s.description = 'client for influxdb'
   s.authors     = ['James Carson']
